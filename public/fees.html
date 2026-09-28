@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fees</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+<nav class="navbar navbar-dark bg-primary">
+    <div class="container">
+        <a class="navbar-brand" href="/student-dashboard.html">Student Management System</a>
+        <button class="btn btn-light btn-sm" onclick="logout()">LOGOUT</button>
+    </div>
+</nav>
+
+<div class="container py-4">
+    <a href="/student-dashboard.html" class="btn btn-outline-primary mb-3">← BACK TO DASHBOARD</a>
+    
+<div class="card shadow-sm mb-4">
+    <div class="card-body">
+        <h3>💰 Student Fees</h3>
+        <p class="text-muted">View your fee information and payment history.</p>
+
+        <div id="message"></div>
+
+        <div class="row g-3 mb-4">
+            <div class="col-md-4">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body">
+                        <h6 class="text-muted">TOTAL FEE</h6>
+                        <h3 id="totalFee">TSh 0.00</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body">
+                        <h6 class="text-muted">AMOUNT PAID</h6>
+                        <h3 id="amountPaid">TSh 0.00</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body">
+                        <h6 class="text-muted">BALANCE</h6>
+                        <h3 id="balance">TSh 0.00</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h5>Payment / Fee History</h5>
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped mt-3">
+                <thead class="table-warning">
+                    <tr>
+                        <th>#</th>
+                        <th>Fee Type</th>
+                        <th>Amount</th>
+                        <th>Paid</th>
+                        <th>Balance</th>
+                        <th>Academic Year</th>
+                    </tr>
+                </thead>
+                <tbody id="feesTable"></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+</div>
+
+<script>
+
+const user = JSON.parse(localStorage.getItem("user"));
+
+if (!user || user.role !== "student") {
+    window.location.href = "/";
+}
+
+function money(value) {
+    return Number(value).toLocaleString("en-TZ", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    });
+}
+
+async function loadFees() {
+    try {
+        const response = await fetch(`/api/student/fees/${user.id}`);
+        const result = await response.json();
+
+        if (!result.success) {
+            document.getElementById("message").innerHTML =
+                `<div class="alert alert-danger">${result.message}</div>`;
+            return;
+        }
+
+        let total = 0;
+        let paid = 0;
+
+        const rows = result.fees.map((fee, index) => {
+            total += Number(fee.amount);
+            paid += Number(fee.amount_paid);
+
+            const balance = Number(fee.amount) - Number(fee.amount_paid);
+
+            return `
+                <tr>
+                    <td>${index + 1}</td>
+                    <td>${fee.fee_type}</td>
+                    <td>TSh ${money(fee.amount)}</td>
+                    <td>TSh ${money(fee.amount_paid)}</td>
+                    <td>TSh ${money(balance)}</td>
+                    <td>${fee.academic_year}</td>
+                </tr>
+            `;
+        }).join("");
+
+        document.getElementById("feesTable").innerHTML =
+            rows || `<tr><td colspan="6" class="text-center text-muted">No fee information available yet.</td></tr>`;
+
+        document.getElementById("totalFee").textContent = `TSh ${money(total)}`;
+        document.getElementById("amountPaid").textContent = `TSh ${money(paid)}`;
+        document.getElementById("balance").textContent = `TSh ${money(total - paid)}`;
+
+    } catch (error) {
+        document.getElementById("message").innerHTML =
+            `<div class="alert alert-danger">Cannot connect to server.</div>`;
+    }
+}
+
+function logout() {
+    localStorage.removeItem("user");
+    window.location.href = "/";
+}
+
+loadFees();
+
+</script>
+</body>
+</html>

@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0">
+
+<title>Admin Dashboard</title>
+
+
+<!-- ========================================
+     BOOTSTRAP 5.3.8
+======================================== -->
+
+<link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+    rel="stylesheet">
+
+
+<!-- ========================================
+     CUSTOM CSS
+======================================== -->
+
+<style>
+
+    body {
+        background-color: #f5f7fb;
+    }
+
+
+    .navbar {
+        background-color: #0f172a;
+    }
+
+
+    .navbar-brand {
+        font-weight: bold;
+    }
+
+
+    .dashboard-title {
+        color: #0f172a;
+        font-weight: bold;
+    }
+
+
+    .card {
+        border: none;
+        border-radius: 15px;
+        transition: 0.2s;
+    }
+
+
+    .card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    }
+
+
+    .icon {
+        font-size: 35px;
+    }
+
+
+    .quick-btn {
+        border-radius: 10px;
+        font-weight: 500;
+    }
+
+
+    footer {
+        margin-top: 60px;
+        padding: 20px;
+        text-align: center;
+        color: #6c757d;
+    }
+
+</style>
+
+</head>
+
+<body>
+
+<!-- ========================================
+     NAVBAR
+======================================== -->
+
+<nav class="navbar navbar-dark">
+
+<div class="container">
+
+    <a
+        class="navbar-brand"
+        href="admin-dashboard.html">
+
+        Student Management System
+
+    </a>
+
+
+    <button
+        class="btn btn-danger btn-sm"
+        onclick="logout()">
+
+        Logout
+
+    </button>
+
+</div>
+
+</nav>
+
+
+<!-- ========================================
+     MAIN CONTENT
+======================================== -->
+
+<div class="container py-5">
+
+
+<!-- ========================================
+     WELCOME
+======================================== -->
+
+<div class="mb-4">
+
+    <h2 class="dashboard-title">
+
+        Admin Dashboard
+
+    </h2>
+
+
+    <p class="text-muted mb-0">
+
+        Welcome,
+
+        <strong id="adminName">
+            Administrator
+        </strong>
+
+    </p>
+
+</div>
+
+
+
+<!-- ========================================
+     STATISTICS
+======================================== -->
+
+<div class="row g-4 mb-5">
+
+
+    <!-- TOTAL STUDENTS -->
+
+    <div class="col-md-4">
+
+        <div class="card shadow-sm p-4">
+
+            <div class="d-flex justify-content-between">
+
+                <div>
+
+                    <p class="text-muted mb-1">
+                        Total Students
+                    </p>
+
+
+                    <h2 id="studentCount">
+                        0
+                    </h2>
+
+                </div>
+
+
+                <div class="icon">
+                    🎓
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- TOTAL SUBJECTS -->
+
+    <div class="col-md-4">
+
+        <div class="card shadow-sm p-4">
+
+            <div class="d-flex justify-content-between">
+
+                <div>
+
+                    <p class="text-muted mb-1">
+                        Subjects
+                    </p>
+
+
+                    <h2 id="subjectCount">
+                        0
+                    </h2>
+
+                </div>
+
+
+                <div class="icon">
+                    📚
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- SYSTEM STATUS -->
+
+    <div class="col-md-4">
+
+        <div class="card shadow-sm p-4">
+
+            <div class="d-flex justify-content-between">
+
+                <div>
+
+                    <p class="text-muted mb-1">
+                        System Status
+                    </p>
+
+
+                    <h5 class="text-success mt-2">
+                        ● Online
+                    </h5>
+
+                </div>
+
+
+                <div class="icon">
+                    🖥️
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ========================================
+     MANAGEMENT
+======================================== -->
+
+<h4 class="mb-3">
+
+    Management
+
+</h4>
+
+
+<div class="row g-4">
+
+
+    <!-- ====================================
+         MANAGE STUDENTS
+    ==================================== -->
+
+    <div class="col-md-6 col-lg-4">
+
+        <div class="card shadow-sm p-4 h-100 d-flex flex-column">
+
+            <div class="icon mb-3">
+                👨‍🎓
+            </div>
+
+
+            <h5>
+                Manage Students
+            </h5>
+
+
+            <p class="text-muted">
+
+                View, search, edit and delete
+                registered students.
+
+            </p>
+
+
+            <a
+                href="manage-students.html"
+                class="btn btn-primary quick-btn mt-auto">
+
+                Manage Students
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ====================================
+         MANAGE SUBJECTS
+    ==================================== -->
+
+    <div class="col-md-6 col-lg-4">
+
+        <div class="card shadow-sm p-4 h-100 d-flex flex-column">
+
+            <div class="icon mb-3">
+                📚
+            </div>
+
+
+            <h5>
+                Manage Subjects
+            </h5>
+
+
+            <p class="text-muted">
+
+                Add and manage subjects
+                available to students.
+
+            </p>
+
+
+            <a
+                href="manage-subjects.html"
+                class="btn btn-primary quick-btn mt-auto">
+
+                Manage Subjects
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ====================================
+         MANAGE RESULTS
+    ==================================== -->
+
+    <div class="col-md-6 col-lg-4">
+
+        <div class="card shadow-sm p-4 h-100 d-flex flex-column">
+
+            <div class="icon mb-3">
+                📊
+            </div>
+
+
+            <h5>
+                Manage Results
+            </h5>
+
+
+            <p class="text-muted">
+
+                Enter and manage student
+                examination results.
+
+            </p>
+
+
+            <a
+                href="manage-results.html"
+                class="btn btn-secondary quick-btn mt-auto">
+
+                Manage Results
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ====================================
+         FEES
+    ==================================== -->
+
+    <div class="col-md-6 col-lg-4">
+
+        <div class="card shadow-sm p-4 h-100 d-flex flex-column">
+
+            <div class="icon mb-3">
+                💰
+            </div>
+
+
+            <h5>
+                Student Fees
+            </h5>
+
+
+            <p class="text-muted">
+
+                View and manage student
+                fee information.
+
+            </p>
+
+
+            <a
+                href="manage-fees.html"
+                class="btn btn-secondary quick-btn mt-auto">
+
+                Manage Fees
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ====================================
+         HOSTEL
+    ==================================== -->
+
+    <div class="col-md-6 col-lg-4">
+
+        <div class="card shadow-sm p-4 h-100 d-flex flex-column">
+
+            <div class="icon mb-3">
+                🏠
+            </div>
+
+
+            <h5>
+                Hostel
+            </h5>
+
+
+            <p class="text-muted">
+
+                Manage student hostel
+                allocation information.
+
+            </p>
+
+
+            <a
+                href="manage-hostel.html"
+                class="btn btn-secondary quick-btn mt-auto">
+
+                Manage Hostel
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ====================================
+         STUDENT DOCUMENTS
+    ==================================== -->
+
+    <div class="col-md-6 col-lg-4">
+
+        <div class="card shadow-sm p-4 h-100 d-flex flex-column">
+
+            <div class="icon mb-3">
+                📄
+            </div>
+
+
+            <h5>
+                Student Documents
+            </h5>
+
+
+            <p class="text-muted">
+
+                View and manage student
+                documents.
+
+            </p>
+
+
+            <!-- CONNECTED TO MANAGE DOCUMENTS -->
+
+            <a
+                href="manage-documents.html"
+                class="btn btn-secondary quick-btn mt-auto">
+
+                Documents
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+
+<!-- ========================================
+     FOOTER
+======================================== -->
+
+<footer>
+
+Student Management System
+&copy;
+2026
+
+</footer>
+
+
+<!-- ========================================
+     JAVASCRIPT
+======================================== -->
+
+<script>
+
+
+// ========================================
+// GET LOGGED-IN USER
+// ========================================
+
+let user = null;
+
+
+try {
+
+    user =
+        JSON.parse(
+            localStorage.getItem("user")
+        );
+
+} catch (error) {
+
+    console.error(
+        "Invalid user data:",
+        error
+    );
+
+    user = null;
+
+}
+
+
+
+// ========================================
+// CHECK LOGIN
+// ========================================
+
+if (!user) {
+
+    alert("Please login first.");
+
+    window.location.replace(
+        "index.html"
+    );
+
+}
+
+
+
+// ========================================
+// GET USER ROLE
+// ========================================
+
+const userRole =
+    String(user?.role || "")
+        .trim()
+        .toLowerCase();
+
+
+console.log(
+    "Logged-in user:",
+    user
+);
+
+
+console.log(
+    "User role:",
+    userRole
+);
+
+
+
+// ========================================
+// CHECK ADMIN ACCESS
+// ========================================
+//
+// Our main administrator role is:
+// super_admin
+//
+// We also allow:
+// admin
+//
+// Student accounts are NOT allowed.
+//
+
+if (
+    userRole !== "super_admin" &&
+    userRole !== "admin"
+) {
+
+    alert(
+        "Access denied. Admin only."
+    );
+
+    localStorage.removeItem(
+        "user"
+    );
+
+    window.location.replace(
+        "index.html"
+    );
+
+}
+
+
+
+// ========================================
+// DISPLAY ADMIN NAME
+// ========================================
+
+document
+    .getElementById("adminName")
+    .textContent =
+        user.fullName ||
+        "Administrator";
+
+
+
+// ========================================
+// LOAD TOTAL STUDENTS
+// ========================================
+
+async function loadStudentCount() {
+
+    try {
+
+        const response =
+            await fetch(
+                "/api/admin/students"
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                data.message ||
+                "Failed to load students."
+            );
+
+        }
+
+
+        const students =
+            Array.isArray(data)
+                ? data
+                : data.students || [];
+
+
+        document
+            .getElementById(
+                "studentCount"
+            )
+            .textContent =
+                students.length;
+
+
+    } catch (error) {
+
+        console.error(
+            "Error loading students:",
+            error
+        );
+
+    }
+
+}
+
+
+
+// ========================================
+// LOAD TOTAL SUBJECTS
+// ========================================
+
+async function loadSubjectCount() {
+
+    try {
+
+        const response =
+            await fetch(
+                "/api/subjects"
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                data.message ||
+                "Failed to load subjects."
+            );
+
+        }
+
+
+        const subjects =
+            Array.isArray(data)
+                ? data
+                : data.subjects || [];
+
+
+        document
+            .getElementById(
+                "subjectCount"
+            )
+            .textContent =
+                subjects.length;
+
+
+    } catch (error) {
+
+        console.error(
+            "Error loading subjects:",
+            error
+        );
+
+    }
+
+}
+
+
+
+// ========================================
+// LOGOUT
+// ========================================
+
+function logout() {
+
+    localStorage.removeItem(
+        "user"
+    );
+
+
+    window.location.replace(
+        "index.html"
+    );
+
+}
+
+
+
+// ========================================
+// START DASHBOARD
+// ========================================
+
+loadStudentCount();
+
+loadSubjectCount();
+
+
+</script>
+
+</body>
+
+</html>

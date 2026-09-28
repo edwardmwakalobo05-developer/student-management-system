@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Manage Hostel</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+    <style>
+
+        body {
+            background: #f5f7fb;
+        }
+
+        .navbar {
+            background: #0f172a;
+        }
+
+        .card {
+            border: none;
+            border-radius: 15px;
+        }
+
+        .page-title {
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        .btn {
+            border-radius: 8px;
+        }
+
+        footer {
+            margin-top: 50px;
+            padding: 20px;
+            text-align: center;
+            color: #6c757d;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- NAVBAR -->
+
+<nav class="navbar navbar-dark">
+
+    <div class="container">
+
+        <a
+            class="navbar-brand"
+            href="admin-dashboard.html">
+
+            Student Management System
+
+        </a>
+
+        <button
+            class="btn btn-danger btn-sm"
+            onclick="logout()">
+
+            Logout
+
+        </button>
+
+    </div>
+
+</nav>
+
+
+<!-- MAIN -->
+
+<div class="container py-4">
+
+
+    <!-- TITLE -->
+
+    <div
+        class="d-flex justify-content-between align-items-center mb-4">
+
+        <div>
+
+            <h2 class="page-title mb-1">
+
+                Manage Hostel
+
+            </h2>
+
+            <p class="text-muted mb-0">
+
+                Manage student hostel allocations
+
+            </p>
+
+        </div>
+
+
+        <button
+            class="btn btn-primary"
+            onclick="openAddModal()">
+
+            + Add Allocation
+
+        </button>
+
+    </div>
+
+
+    <!-- SEARCH -->
+
+    <div class="card shadow-sm mb-4">
+
+        <div class="card-body">
+
+            <input
+                type="text"
+                id="searchInput"
+                class="form-control"
+                placeholder="Search student, hostel, room or block..."
+                onkeyup="searchHostel()">
+
+        </div>
+
+    </div>
+
+
+    <!-- TABLE -->
+
+    <div class="card shadow-sm">
+
+        <div class="card-body">
+
+            <div class="table-responsive">
+
+                <table class="table table-hover align-middle">
+
+                    <thead class="table-dark">
+
+                        <tr>
+
+                            <th>#</th>
+
+                            <th>Student</th>
+
+                            <th>Email</th>
+
+                            <th>Hostel</th>
+
+                            <th>Block</th>
+
+                            <th>Room</th>
+
+                            <th>Bed</th>
+
+                            <th>Status</th>
+
+                            <th>Actions</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="hostelTable">
+
+                        <tr>
+
+                            <td
+                                colspan="9"
+                                class="text-center text-muted">
+
+                                Loading...
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- MODAL -->
+
+<div
+    class="modal fade"
+    id="hostelModal"
+    tabindex="-1">
+
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+
+
+            <div class="modal-header">
+
+                <h5
+                    class="modal-title"
+                    id="modalTitle">
+
+                    Add Hostel Allocation
+
+                </h5>
+
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal">
+                </button>
+
+            </div>
+
+
+            <div class="modal-body">
+
+
+                <form id="hostelForm">
+
+
+                    <input
+                        type="hidden"
+                        id="hostelId">
+
+
+                    <!-- STUDENT -->
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+
+                            Student
+
+                        </label>
+
+                        <select
+                            id="studentId"
+                            class="form-select"
+                            required>
+
+                            <option value="">
+
+                                Select Student
+
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- HOSTEL -->
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+
+                            Hostel Name
+
+                        </label>
+
+                        <input
+                            type="text"
+                            id="hostelName"
+                            class="form-control"
+                            placeholder="Example: Mlimani Hostel"
+                            required>
+
+                    </div>
+
+
+                    <!-- BLOCK -->
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+
+                            Block
+
+                        </label>
+
+                        <input
+                            type="text"
+                            id="blockName"
+                            class="form-control"
+                            placeholder="Example: Block A">
+
+                    </div>
+
+
+                    <!-- ROOM -->
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+
+                            Room Number
+
+                        </label>
+
+                        <input
+                            type="text"
+                            id="roomNumber"
+                            class="form-control"
+                            placeholder="Example: 101">
+
+                    </div>
+
+
+                    <!-- BED -->
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+
+                            Bed Number
+
+                        </label>
+
+                        <input
+                            type="text"
+                            id="bedNumber"
+                            class="form-control"
+                            placeholder="Example: Bed 2">
+
+                    </div>
+
+
+                    <!-- STATUS -->
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+
+                            Status
+
+                        </label>
+
+                        <select
+                            id="status"
+                            class="form-select">
+
+                            <option value="Allocated">
+
+                                Allocated
+
+                            </option>
+
+                            <option value="Pending">
+
+                                Pending
+
+                            </option>
+
+                            <option value="Vacated">
+
+                                Vacated
+
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary w-100">
+
+                        Save Allocation
+
+                    </button>
+
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<footer>
+
+    Student Management System
+
+</footer>
+
+
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js">
+</script>
+
+
+<script>
+
+
+/* ========================================
+   ADMIN CHECK
+======================================== */
+
+const user = JSON.parse(
+    localStorage.getItem("user")
+);
+
+
+if (!user) {
+
+    window.location.href = "index.html";
+
+}
+
+
+const role = String(user.role || "")
+    .trim()
+    .toLowerCase();
+
+
+if (
+    role !== "super_admin" &&
+    role !== "admin"
+) {
+
+    alert("Access denied. Admin only.");
+
+    window.location.href = "index.html";
+
+}
+
+
+/* ========================================
+   VARIABLES
+======================================== */
+
+let allHostel = [];
+
+let hostelModal;
+
+
+/* ========================================
+   PAGE LOAD
+======================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    async function () {
+
+        hostelModal =
+            new bootstrap.Modal(
+                document.getElementById(
+                    "hostelModal"
+                )
+            );
+
+        await loadStudents();
+
+        await loadHostel();
+
+    }
+);
+
+
+/* ========================================
+   LOAD STUDENTS
+======================================== */
+
+async function loadStudents() {
+
+    try {
+
+        const response =
+            await fetch(
+                "/api/admin/students"
+            );
+
+        const data =
+            await response.json();
+
+        const students =
+            Array.isArray(data)
+                ? data
+                : (data.students || []);
+
+
+        const select =
+            document.getElementById(
+                "studentId"
+            );
+
+
+        select.innerHTML = `
+
+            <option value="">
+
+                Select Student
+
+            </option>
+
+        `;
+
+
+        students.forEach(student => {
+
+            select.innerHTML += `
+
+                <option value="${student.id}">
+
+                    ${escapeHtml(
+                        student.full_name
+                    )}
+                    -
+                    ${escapeHtml(
+                        student.email
+                    )}
+
+                </option>
+
+            `;
+
+        });
+
+
+    } catch (error) {
+
+        console.error(
+            "Load students error:",
+            error
+        );
+
+        alert(
+            "Failed to load students."
+        );
+
+    }
+
+}
+
+
+/* ========================================
+   LOAD HOSTEL
+======================================== */
+
+async function loadHostel() {
+
+    try {
+
+        const response =
+            await fetch(
+                "/api/hostel"
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                data.message ||
+                "Failed to load hostel"
+            );
+
+        }
+
+
+        allHostel =
+            Array.isArray(data)
+                ? data
+                : (data.hostel || []);
+
+
+        displayHostel(
+            allHostel
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "Load hostel error:",
+            error
+        );
+
+
+        document.getElementById(
+            "hostelTable"
+        ).innerHTML = `
+
+            <tr>
+
+                <td
+                    colspan="9"
+                    class="text-center text-danger">
+
+                    Failed to load hostel records.
+
+                </td>
+
+            </tr>
+
+        `;
+
+    }
+
+}
+
+
+/* ========================================
+   DISPLAY HOSTEL
+======================================== */
+
+function displayHostel(records) {
+
+    const table =
+        document.getElementById(
+            "hostelTable"
+        );
+
+
+    table.innerHTML = "";
+
+
+    if (records.length === 0) {
+
+        table.innerHTML = `
+
+            <tr>
+
+                <td
+                    colspan="9"
+                    class="text-center text-muted">
+
+                    No hostel allocations found.
+
+                </td>
+
+            </tr>
+
+        `;
+
+        return;
+
+    }
+
+
+    records.forEach(
+        (hostel, index) => {
+
+
+        table.innerHTML += `
+
+            <tr>
+
+                <td>
+                    ${index + 1}
+                </td>
+
+                <td>
+                    ${escapeHtml(
+                        hostel.full_name || ""
+                    )}
+                </td>
+
+                <td>
+                    ${escapeHtml(
+                        hostel.email || ""
+                    )}
+                </td>
+
+                <td>
+                    ${escapeHtml(
+                        hostel.hostel_name || ""
+                    )}
+                </td>
+
+                <td>
+                    ${escapeHtml(
+                        hostel.block_name || "-"
+                    )}
+                </td>
+
+                <td>
+                    ${escapeHtml(
+                        hostel.room_number || "-"
+                    )}
+                </td>
+
+                <td>
+                    ${escapeHtml(
+                        hostel.bed_number || "-"
+                    )}
+                </td>
+
+                <td>
+
+                    <span
+                        class="badge
+                        ${
+                            hostel.status ===
+                            "Allocated"
+                                ? "text-bg-success"
+                                : hostel.status ===
+                                  "Pending"
+                                    ? "text-bg-warning"
+                                    : "text-bg-secondary"
+                        }">
+
+                        ${escapeHtml(
+                            hostel.status || ""
+                        )}
+
+                    </span>
+
+                </td>
+
+                <td>
+
+                    <button
+                        class="btn btn-sm btn-warning me-1"
+                        onclick="editHostel(${hostel.id})">
+
+                        Edit
+
+                    </button>
+
+                    <button
+                        class="btn btn-sm btn-danger"
+                        onclick="deleteHostel(${hostel.id})">
+
+                        Delete
+
+                    </button>
+
+                </td>
+
+            </tr>
+
+        `;
+
+    });
+
+}
+
+
+/* ========================================
+   OPEN ADD MODAL
+======================================== */
+
+function openAddModal() {
+
+    document.getElementById(
+        "modalTitle"
+    ).textContent =
+        "Add Hostel Allocation";
+
+
+    document.getElementById(
+        "hostelForm"
+    ).reset();
+
+
+    document.getElementById(
+        "hostelId"
+    ).value = "";
+
+
+    hostelModal.show();
+
+}
+
+
+/* ========================================
+   EDIT HOSTEL
+======================================== */
+
+function editHostel(id) {
+
+    const hostel =
+        allHostel.find(
+            item =>
+                Number(item.id) ===
+                Number(id)
+        );
+
+
+    if (!hostel) {
+
+        alert(
+            "Hostel allocation not found."
+        );
+
+        return;
+
+    }
+
+
+    document.getElementById(
+        "modalTitle"
+    ).textContent =
+        "Edit Hostel Allocation";
+
+
+    document.getElementById(
+        "hostelId"
+    ).value =
+        hostel.id;
+
+
+    document.getElementById(
+        "studentId"
+    ).value =
+        hostel.student_id;
+
+
+    document.getElementById(
+        "hostelName"
+    ).value =
+        hostel.hostel_name;
+
+
+    document.getElementById(
+        "blockName"
+    ).value =
+        hostel.block_name || "";
+
+
+    document.getElementById(
+        "roomNumber"
+    ).value =
+        hostel.room_number || "";
+
+
+    document.getElementById(
+        "bedNumber"
+    ).value =
+        hostel.bed_number || "";
+
+
+    document.getElementById(
+        "status"
+    ).value =
+        hostel.status || "Allocated";
+
+
+    hostelModal.show();
+
+}
+
+
+/* ========================================
+   SAVE HOSTEL
+======================================== */
+
+document.getElementById(
+    "hostelForm"
+).addEventListener(
+    "submit",
+    async function (event) {
+
+        event.preventDefault();
+
+
+        const hostelId =
+            document.getElementById(
+                "hostelId"
+            ).value;
+
+
+        const studentId =
+            Number(
+                document.getElementById(
+                    "studentId"
+                ).value
+            );
+
+
+        const hostelName =
+            document.getElementById(
+                "hostelName"
+            ).value.trim();
+
+
+        const blockName =
+            document.getElementById(
+                "blockName"
+            ).value.trim();
+
+
+        const roomNumber =
+            document.getElementById(
+                "roomNumber"
+            ).value.trim();
+
+
+        const bedNumber =
+            document.getElementById(
+                "bedNumber"
+            ).value.trim();
+
+
+        const status =
+            document.getElementById(
+                "status"
+            ).value;
+
+
+        if (!studentId) {
+
+            alert(
+                "Please select a student."
+            );
+
+            return;
+
+        }
+
+
+        if (!hostelName) {
+
+            alert(
+                "Please enter hostel name."
+            );
+
+            return;
+
+        }
+
+
+        const hostelData = {
+
+            studentId,
+            hostelName,
+            blockName,
+            roomNumber,
+            bedNumber,
+            status
+
+        };
+
+
+        try {
+
+            let response;
+
+
+            if (!hostelId) {
+
+                response =
+                    await fetch(
+                        "/api/hostel",
+                        {
+
+                            method: "POST",
+
+                            headers: {
+
+                                "Content-Type":
+                                    "application/json"
+
+                            },
+
+                            body:
+                                JSON.stringify(
+                                    hostelData
+                                )
+
+                        }
+                    );
+
+            } else {
+
+                response =
+                    await fetch(
+                        `/api/hostel/${hostelId}`,
+                        {
+
+                            method: "PUT",
+
+                            headers: {
+
+                                "Content-Type":
+                                    "application/json"
+
+                            },
+
+                            body:
+                                JSON.stringify(
+                                    hostelData
+                                )
+
+                        }
+                    );
+
+            }
+
+
+            const data =
+                await response.json();
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    data.message ||
+                    "Failed to save allocation."
+                );
+
+            }
+
+
+            alert(
+                data.message ||
+                "Hostel allocation saved successfully!"
+            );
+
+
+            hostelModal.hide();
+
+
+            await loadHostel();
+
+
+        } catch (error) {
+
+            console.error(
+                "Save hostel error:",
+                error
+            );
+
+
+            alert(
+                error.message ||
+                "Failed to save allocation."
+            );
+
+        }
+
+    }
+);
+
+
+/* ========================================
+   DELETE HOSTEL
+======================================== */
+
+async function deleteHostel(id) {
+
+    if (
+        !confirm(
+            "Are you sure you want to delete this hostel allocation?"
+        )
+    ) {
+
+        return;
+
+    }
+
+
+    try {
+
+        const response =
+            await fetch(
+                `/api/hostel/${id}`,
+                {
+                    method: "DELETE"
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                data.message ||
+                "Failed to delete allocation."
+            );
+
+        }
+
+
+        alert(
+            data.message ||
+            "Hostel allocation deleted successfully!"
+        );
+
+
+        await loadHostel();
+
+
+    } catch (error) {
+
+        console.error(
+            "Delete hostel error:",
+            error
+        );
+
+
+        alert(
+            error.message ||
+            "Failed to delete allocation."
+        );
+
+    }
+
+}
+
+
+/* ========================================
+   SEARCH
+======================================== */
+
+function searchHostel() {
+
+    const search =
+        document.getElementById(
+            "searchInput"
+        )
+        .value
+        .toLowerCase()
+        .trim();
+
+
+    const filtered =
+        allHostel.filter(
+            hostel => {
+
+                return (
+
+                    String(
+                        hostel.full_name || ""
+                    )
+                    .toLowerCase()
+                    .includes(search)
+
+                    ||
+
+                    String(
+                        hostel.email || ""
+                    )
+                    .toLowerCase()
+                    .includes(search)
+
+                    ||
+
+                    String(
+                        hostel.hostel_name || ""
+                    )
+                    .toLowerCase()
+                    .includes(search)
+
+                    ||
+
+                    String(
+                        hostel.block_name || ""
+                    )
+                    .toLowerCase()
+                    .includes(search)
+
+                    ||
+
+                    String(
+                        hostel.room_number || ""
+                    )
+                    .toLowerCase()
+                    .includes(search)
+
+                );
+
+            }
+        );
+
+
+    displayHostel(
+        filtered
+    );
+
+}
+
+
+/* ========================================
+   ESCAPE HTML
+======================================== */
+
+function escapeHtml(value) {
+
+    return String(value)
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+/* ========================================
+   LOGOUT
+======================================== */
+
+function logout() {
+
+    localStorage.removeItem(
+        "user"
+    );
+
+    window.location.href =
+        "index.html";
+
+}
+
+</script>
+
+</body>
+
+</html>

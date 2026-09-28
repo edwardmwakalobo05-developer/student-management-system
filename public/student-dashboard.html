@@ -1,0 +1,1517 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Student Dashboard</title>
+
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+</head>
+
+
+<body class="bg-light">
+
+
+<!-- =====================================
+     NAVBAR
+===================================== -->
+
+<nav class="navbar navbar-dark bg-primary">
+
+    <div class="container">
+
+        <span class="navbar-brand fw-bold">
+
+            Student Management System
+
+        </span>
+
+
+        <button
+            id="logoutButton"
+            class="btn btn-light">
+
+            LOGOUT
+
+        </button>
+
+    </div>
+
+</nav>
+
+
+
+<!-- =====================================
+     MAIN CONTENT
+===================================== -->
+
+<div class="container py-5">
+
+
+    <!-- =================================
+         WELCOME
+    ================================== -->
+
+    <div class="mb-4">
+
+        <h2>
+
+            Welcome,
+            <span id="studentName">
+                Loading...
+            </span>
+
+        </h2>
+
+
+        <p class="text-muted">
+
+            Welcome to your student dashboard.
+
+        </p>
+
+    </div>
+
+
+
+    <!-- =================================
+         PROFILE
+    ================================== -->
+
+    <div class="card shadow-sm mb-4">
+
+        <div class="card-body">
+
+            <h4 class="mb-4">
+
+                My Profile
+
+            </h4>
+
+
+            <div class="row">
+
+
+                <!-- FULL NAME -->
+
+                <div class="col-md-4 mb-3">
+
+                    <strong>
+
+                        Full Name
+
+                    </strong>
+
+
+                    <p
+                        id="profileName"
+                        class="text-muted">
+
+                        Loading...
+
+                    </p>
+
+                </div>
+
+
+
+                <!-- EMAIL -->
+
+                <div class="col-md-4 mb-3">
+
+                    <strong>
+
+                        Email
+
+                    </strong>
+
+
+                    <p
+                        id="profileEmail"
+                        class="text-muted">
+
+                        Loading...
+
+                    </p>
+
+                </div>
+
+
+
+                <!-- PHONE -->
+
+                <div class="col-md-4 mb-3">
+
+                    <strong>
+
+                        Phone Number
+
+                    </strong>
+
+
+                    <p
+                        id="profilePhone"
+                        class="text-muted">
+
+                        Loading...
+
+                    </p>
+
+                </div>
+
+
+
+                <!-- ROLE -->
+
+                <div class="col-md-4 mb-3">
+
+                    <strong>
+
+                        Role
+
+                    </strong>
+
+
+                    <p
+                        id="profileRole"
+                        class="text-muted">
+
+                        Loading...
+
+                    </p>
+
+                </div>
+
+
+
+                <!-- CREATED -->
+
+                <div class="col-md-4 mb-3">
+
+                    <strong>
+
+                        Account Created
+
+                    </strong>
+
+
+                    <p
+                        id="profileCreated"
+                        class="text-muted">
+
+                        Loading...
+
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+            <div id="profileMessage"></div>
+
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =================================
+         SUBJECTS
+    ================================== -->
+
+    <div class="card shadow-sm mb-4">
+
+        <div class="card-body">
+
+
+            <div class="d-flex justify-content-between align-items-center mb-3">
+
+
+                <div>
+
+                    <h4 class="mb-1">
+
+                        📚 Subjects
+
+                    </h4>
+
+
+                    <p class="text-muted mb-0">
+
+                        Register for your subjects.
+
+                    </p>
+
+                </div>
+
+
+                <button
+                    id="subjectsButton"
+                    class="btn btn-primary">
+
+                    VIEW SUBJECTS
+
+                </button>
+
+
+            </div>
+
+
+
+            <!-- SUBJECT MESSAGE -->
+
+            <div
+                id="subjectsMessage"
+                class="mb-3">
+
+            </div>
+
+
+
+            <!-- AVAILABLE SUBJECTS -->
+
+            <div
+                id="subjectsContainer">
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =================================
+         MY REGISTERED SUBJECTS
+    ================================== -->
+
+    <div class="card shadow-sm mb-4">
+
+        <div class="card-body">
+
+
+            <h4 class="mb-1">
+
+                📖 My Registered Subjects
+
+            </h4>
+
+
+            <p class="text-muted">
+
+                Subjects you have registered.
+
+            </p>
+
+
+            <div
+                id="mySubjectsMessage">
+
+            </div>
+
+
+            <div
+                id="mySubjectsContainer">
+
+                <div class="text-muted">
+
+                    Loading your subjects...
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =================================
+         OTHER FEATURES
+    ================================== -->
+
+    <div class="row g-4">
+
+
+        <!-- RESULTS -->
+
+        <div class="col-md-4">
+
+            <div class="card shadow-sm h-100">
+
+                <div class="card-body">
+
+                    <h5>
+
+                        📊 Results
+
+                    </h5>
+
+
+                    <p class="text-muted">
+
+                        View your academic results.
+
+                    </p>
+
+
+                    <a
+                        href="/results.html"
+                        class="btn btn-success">
+
+                        VIEW RESULTS
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- FEES -->
+
+        <div class="col-md-4">
+
+            <div class="card shadow-sm h-100">
+
+                <div class="card-body">
+
+                    <h5>
+
+                        💰 Fees
+
+                    </h5>
+
+
+                    <p class="text-muted">
+
+                        View your fee information.
+
+                    </p>
+
+
+                    <a
+                        href="/fees.html"
+                        class="btn btn-warning">
+
+                        VIEW FEES
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- HOSTEL -->
+
+        <div class="col-md-4">
+
+            <div class="card shadow-sm h-100">
+
+                <div class="card-body">
+
+                    <h5>
+
+                        🏠 Hostel
+
+                    </h5>
+
+
+                    <p class="text-muted">
+
+                        View hostel information.
+
+                    </p>
+
+
+                    <a
+                        href="/hostel.html"
+                        class="btn btn-info">
+
+                        VIEW HOSTEL
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- DOCUMENTS -->
+
+        <div class="col-md-4">
+
+            <div class="card shadow-sm h-100">
+
+                <div class="card-body">
+
+                    <h5>
+
+                        📄 Documents
+
+                    </h5>
+
+
+                    <p class="text-muted">
+
+                        Access your documents.
+
+                    </p>
+
+
+                    <a
+                        href="/documents.html"
+                        class="btn btn-secondary">
+
+                        VIEW DOCUMENTS
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ACCOUNT -->
+
+        <div class="col-md-4">
+
+            <div class="card shadow-sm h-100">
+
+                <div class="card-body">
+
+                    <h5>
+
+                        🔐 Account
+
+                    </h5>
+
+
+                    <p class="text-muted">
+
+                        Manage your account.
+
+                    </p>
+
+
+                    <a
+                        href="/account.html"
+                        class="btn btn-dark">
+
+                        ACCOUNT SETTINGS
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+
+<script>
+
+
+// ========================================
+// GET LOGGED-IN USER
+// ========================================
+
+const user =
+    JSON.parse(
+        localStorage.getItem("user")
+    );
+
+
+
+// ========================================
+// CHECK LOGIN
+// ========================================
+
+if (!user) {
+
+    window.location.href = "/";
+
+}
+
+
+
+// ========================================
+// CHECK ROLE
+// ========================================
+
+else if (
+    user.role !== "student"
+) {
+
+    window.location.href = "/";
+
+}
+
+
+
+// ========================================
+// ELEMENTS
+// ========================================
+
+const studentName =
+    document.getElementById(
+        "studentName"
+    );
+
+
+const profileName =
+    document.getElementById(
+        "profileName"
+    );
+
+
+const profileEmail =
+    document.getElementById(
+        "profileEmail"
+    );
+
+
+const profilePhone =
+    document.getElementById(
+        "profilePhone"
+    );
+
+
+const profileRole =
+    document.getElementById(
+        "profileRole"
+    );
+
+
+const profileCreated =
+    document.getElementById(
+        "profileCreated"
+    );
+
+
+const profileMessage =
+    document.getElementById(
+        "profileMessage"
+    );
+
+
+const subjectsButton =
+    document.getElementById(
+        "subjectsButton"
+    );
+
+
+const subjectsContainer =
+    document.getElementById(
+        "subjectsContainer"
+    );
+
+
+const subjectsMessage =
+    document.getElementById(
+        "subjectsMessage"
+    );
+
+
+const mySubjectsContainer =
+    document.getElementById(
+        "mySubjectsContainer"
+    );
+
+
+const mySubjectsMessage =
+    document.getElementById(
+        "mySubjectsMessage"
+    );
+
+
+
+// ========================================
+// LOAD PROFILE
+// ========================================
+
+async function loadProfile() {
+
+
+    try {
+
+
+        const response =
+            await fetch(
+                `/api/student/profile/${user.id}`
+            );
+
+
+        const result =
+            await response.json();
+
+
+
+        if (!result.success) {
+
+            profileMessage.innerHTML = `
+
+                <div class="alert alert-danger">
+
+                    ${result.message}
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+
+        const student =
+            result.student;
+
+
+
+        studentName.textContent =
+            student.fullName;
+
+
+        profileName.textContent =
+            student.fullName;
+
+
+        profileEmail.textContent =
+            student.email;
+
+
+        profilePhone.textContent =
+            student.phone;
+
+
+        profileRole.textContent =
+            student.role;
+
+
+        profileCreated.textContent =
+            new Date(
+                student.createdAt
+            ).toLocaleDateString();
+
+
+    }
+
+
+    catch (error) {
+
+
+        console.error(
+            "PROFILE ERROR:",
+            error
+        );
+
+
+        profileMessage.innerHTML = `
+
+            <div class="alert alert-danger">
+
+                Cannot connect to server.
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+
+// ========================================
+// LOAD AVAILABLE SUBJECTS
+// ========================================
+
+async function loadSubjects() {
+
+
+    subjectsButton.disabled =
+        true;
+
+
+    subjectsButton.textContent =
+        "LOADING...";
+
+
+    subjectsMessage.innerHTML =
+        "";
+
+
+    try {
+
+
+        const response =
+            await fetch(
+                "/api/subjects"
+            );
+
+
+        const result =
+            await response.json();
+
+
+
+        if (!result.success) {
+
+            subjectsMessage.innerHTML = `
+
+                <div class="alert alert-danger">
+
+                    ${result.message}
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+
+        const subjects =
+            result.subjects;
+
+
+
+        if (subjects.length === 0) {
+
+            subjectsContainer.innerHTML = `
+
+                <div class="alert alert-info">
+
+                    No subjects available.
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+
+        let table = `
+
+            <div class="table-responsive">
+
+                <table class="table table-bordered table-hover">
+
+                    <thead class="table-primary">
+
+                        <tr>
+
+                            <th>
+                                #
+                            </th>
+
+                            <th>
+                                Subject Code
+                            </th>
+
+                            <th>
+                                Subject Name
+                            </th>
+
+                            <th>
+                                Description
+                            </th>
+
+                            <th>
+                                Action
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+        `;
+
+
+
+        subjects.forEach(
+            (subject, index) => {
+
+
+                table += `
+
+                    <tr>
+
+                        <td>
+                            ${index + 1}
+                        </td>
+
+                        <td>
+                            <strong>
+                                ${subject.subject_code}
+                            </strong>
+                        </td>
+
+                        <td>
+                            ${subject.subject_name}
+                        </td>
+
+                        <td>
+                            ${subject.description}
+                        </td>
+
+                        <td>
+
+                            <button
+                                class="btn btn-success btn-sm"
+                                onclick="registerSubject(${subject.id})">
+
+                                REGISTER
+
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+                `;
+
+            }
+        );
+
+
+
+        table += `
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        `;
+
+
+
+        subjectsContainer.innerHTML =
+            table;
+
+
+        subjectsButton.textContent =
+            "HIDE SUBJECTS";
+
+
+        subjectsButton.classList.remove(
+            "btn-primary"
+        );
+
+
+        subjectsButton.classList.add(
+            "btn-secondary"
+        );
+
+
+        subjectsButton.removeEventListener(
+            "click",
+            loadSubjects
+        );
+
+
+        subjectsButton.addEventListener(
+            "click",
+            hideSubjects
+        );
+
+
+    }
+
+
+    catch (error) {
+
+
+        console.error(
+            "SUBJECTS ERROR:",
+            error
+        );
+
+
+        subjectsMessage.innerHTML = `
+
+            <div class="alert alert-danger">
+
+                Cannot connect to server.
+
+            </div>
+
+        `;
+
+    }
+
+
+    finally {
+
+        subjectsButton.disabled =
+            false;
+
+    }
+
+}
+
+
+
+// ========================================
+// REGISTER SUBJECT
+// ========================================
+
+async function registerSubject(
+    subjectId
+) {
+
+
+    subjectsMessage.innerHTML =
+        "";
+
+
+    try {
+
+
+        const response =
+            await fetch(
+                "/api/student/subjects",
+                {
+
+                    method: "POST",
+
+                    headers: {
+
+                        "Content-Type":
+                            "application/json"
+
+                    },
+
+                    body:
+                        JSON.stringify({
+
+                            studentId:
+                                user.id,
+
+                            subjectId:
+                                subjectId
+
+                        })
+
+                }
+            );
+
+
+        const result =
+            await response.json();
+
+
+
+        if (result.success) {
+
+
+            subjectsMessage.innerHTML = `
+
+                <div class="alert alert-success">
+
+                    ${result.message}
+
+                </div>
+
+            `;
+
+
+            // Reload registered subjects
+
+            loadMySubjects();
+
+
+        }
+
+
+        else {
+
+
+            subjectsMessage.innerHTML = `
+
+                <div class="alert alert-danger">
+
+                    ${result.message}
+
+                </div>
+
+            `;
+
+        }
+
+
+    }
+
+
+    catch (error) {
+
+
+        console.error(
+            "REGISTER SUBJECT ERROR:",
+            error
+        );
+
+
+        subjectsMessage.innerHTML = `
+
+            <div class="alert alert-danger">
+
+                Cannot connect to server.
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+
+// ========================================
+// LOAD MY REGISTERED SUBJECTS
+// ========================================
+
+async function loadMySubjects() {
+
+
+    try {
+
+
+        const response =
+            await fetch(
+                `/api/student/subjects/${user.id}`
+            );
+
+
+        const result =
+            await response.json();
+
+
+
+        if (!result.success) {
+
+            mySubjectsMessage.innerHTML = `
+
+                <div class="alert alert-danger">
+
+                    ${result.message}
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+
+        const subjects =
+            result.subjects;
+
+
+
+        if (subjects.length === 0) {
+
+
+            mySubjectsContainer.innerHTML = `
+
+                <div class="alert alert-info">
+
+                    You have not registered any subjects yet.
+
+                </div>
+
+            `;
+
+
+            return;
+
+        }
+
+
+
+        let table = `
+
+            <div class="table-responsive">
+
+                <table class="table table-bordered table-hover">
+
+                    <thead class="table-success">
+
+                        <tr>
+
+                            <th>
+                                #
+                            </th>
+
+                            <th>
+                                Subject Code
+                            </th>
+
+                            <th>
+                                Subject Name
+                            </th>
+
+                            <th>
+                                Registered Date
+                            </th>
+
+                            <th>
+                                Action
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+        `;
+
+
+
+        subjects.forEach(
+            (subject, index) => {
+
+
+                table += `
+
+                    <tr>
+
+                        <td>
+                            ${index + 1}
+                        </td>
+
+                        <td>
+                            <strong>
+                                ${subject.subject_code}
+                            </strong>
+                        </td>
+
+                        <td>
+                            ${subject.subject_name}
+                        </td>
+
+                        <td>
+                            ${new Date(
+                                subject.registered_at
+                            ).toLocaleDateString()}
+                        </td>
+
+                        <td>
+
+                            <button
+                                class="btn btn-danger btn-sm"
+                                onclick="removeSubject(${subject.subject_id})">
+
+                                REMOVE
+
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+                `;
+
+            }
+        );
+
+
+
+        table += `
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        `;
+
+
+
+        mySubjectsContainer.innerHTML =
+            table;
+
+
+    }
+
+
+    catch (error) {
+
+
+        console.error(
+            "MY SUBJECTS ERROR:",
+            error
+        );
+
+
+        mySubjectsContainer.innerHTML = `
+
+            <div class="alert alert-danger">
+
+                Cannot connect to server.
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+
+// ========================================
+// REMOVE SUBJECT
+// ========================================
+
+async function removeSubject(
+    subjectId
+) {
+
+
+    const confirmRemove =
+        confirm(
+            "Are you sure you want to remove this subject?"
+        );
+
+
+    if (!confirmRemove) {
+
+        return;
+
+    }
+
+
+
+    try {
+
+
+        const response =
+            await fetch(
+                `/api/student/subjects/${user.id}/${subjectId}`,
+                {
+
+                    method: "DELETE"
+
+                }
+            );
+
+
+        const result =
+            await response.json();
+
+
+
+        if (result.success) {
+
+
+            mySubjectsMessage.innerHTML = `
+
+                <div class="alert alert-success">
+
+                    ${result.message}
+
+                </div>
+
+            `;
+
+
+            loadMySubjects();
+
+        }
+
+
+        else {
+
+
+            mySubjectsMessage.innerHTML = `
+
+                <div class="alert alert-danger">
+
+                    ${result.message}
+
+                </div>
+
+            `;
+
+        }
+
+
+    }
+
+
+    catch (error) {
+
+
+        console.error(
+            "REMOVE SUBJECT ERROR:",
+            error
+        );
+
+
+        mySubjectsMessage.innerHTML = `
+
+            <div class="alert alert-danger">
+
+                Cannot connect to server.
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+
+// ========================================
+// HIDE SUBJECTS
+// ========================================
+
+function hideSubjects() {
+
+
+    subjectsContainer.innerHTML =
+        "";
+
+
+    subjectsMessage.innerHTML =
+        "";
+
+
+    subjectsButton.textContent =
+        "VIEW SUBJECTS";
+
+
+    subjectsButton.classList.remove(
+        "btn-secondary"
+    );
+
+
+    subjectsButton.classList.add(
+        "btn-primary"
+    );
+
+
+    subjectsButton.removeEventListener(
+        "click",
+        hideSubjects
+    );
+
+
+    subjectsButton.addEventListener(
+        "click",
+        loadSubjects
+    );
+
+}
+
+
+
+// ========================================
+// VIEW SUBJECTS BUTTON
+// ========================================
+
+subjectsButton.addEventListener(
+    "click",
+    loadSubjects
+);
+
+
+
+// ========================================
+// LOGOUT
+// ========================================
+
+document
+    .getElementById("logoutButton")
+    .addEventListener(
+        "click",
+        () => {
+
+
+            localStorage.removeItem(
+                "user"
+            );
+
+
+            window.location.href =
+                "/";
+
+        }
+    );
+
+
+
+// ========================================
+// START
+// ========================================
+
+if (user) {
+
+    loadProfile();
+
+    loadMySubjects();
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>

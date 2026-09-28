@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documents</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+<nav class="navbar navbar-dark bg-primary">
+    <div class="container">
+        <a class="navbar-brand" href="/student-dashboard.html">Student Management System</a>
+        <button class="btn btn-light btn-sm" onclick="logout()">LOGOUT</button>
+    </div>
+</nav>
+
+<div class="container py-4">
+    <a href="/student-dashboard.html" class="btn btn-outline-primary mb-3">← BACK TO DASHBOARD</a>
+    
+<div class="card shadow-sm">
+    <div class="card-body">
+        <h3>📄 My Documents</h3>
+        <p class="text-muted">Access documents available for your account.</p>
+        <div id="message"></div>
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped mt-3">
+                <thead class="table-secondary">
+                    <tr>
+                        <th>#</th>
+                        <th>Document</th>
+                        <th>Date Added</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="documentsTable"></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+</div>
+
+<script>
+
+const user = JSON.parse(localStorage.getItem("user"));
+
+if (!user || user.role !== "student") {
+    window.location.href = "/";
+}
+
+async function loadDocuments() {
+    try {
+        const response = await fetch(`/api/student/documents/${user.id}`);
+        const result = await response.json();
+
+        if (!result.success) {
+            document.getElementById("message").innerHTML =
+                `<div class="alert alert-danger">${result.message}</div>`;
+            return;
+        }
+
+        const rows = result.documents.map((doc, index) => `
+            <tr>
+                <td>${index + 1}</td>
+                <td>${doc.document_name}</td>
+                <td>${new Date(doc.created_at).toLocaleDateString()}</td>
+                <td>
+                    <a href="${doc.document_url}" target="_blank" class="btn btn-secondary btn-sm">
+                        VIEW / DOWNLOAD
+                    </a>
+                </td>
+            </tr>
+        `).join("");
+
+        document.getElementById("documentsTable").innerHTML =
+            rows || `<tr><td colspan="4" class="text-center text-muted">No documents available yet.</td></tr>`;
+    } catch (error) {
+        document.getElementById("message").innerHTML =
+            `<div class="alert alert-danger">Cannot connect to server.</div>`;
+    }
+}
+
+function logout() {
+    localStorage.removeItem("user");
+    window.location.href = "/";
+}
+
+loadDocuments();
+
+</script>
+</body>
+</html>
